@@ -1,0 +1,44 @@
+{
+    "name": "veryfine/super-dropdown",
+    "description": "A custom field for the Craft CMS for building complex dropdown fields from native elements or data.",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "super dropdown",
+        "dropdown",
+        "field",
+        "select"
+    ],
+    "support": {
+        "docs": "https://veryfine.work/plugins/superdropdown/docs/",
+        "issues": "https://github.com/veryfinework/super-dropdown/issues"
+    },
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Very Fine",
+            "homepage": "https://veryfine.work"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "veryfine\\superdropdown\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Super Dropdown",
+        "handle": "super-dropdown",
+        "description": "Fieldtype for building complex dropdown fields from native elements or data.",
+        "hasCpSettings": false,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/veryfinework/super-dropdown/master/CHANGELOG.md",
+        "class": "veryfine\\superdropdown\\SuperDropdown"
+    }
+}

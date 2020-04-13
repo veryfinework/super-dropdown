@@ -1,0 +1,159 @@
+{#
+/**
+ * Super dropdown plugin for Craft CMS
+ *
+ * Superdropdown Field Settings
+ *
+ * @author    veryfine
+ * @copyright Copyright (c) 2020 veryfine
+ * @link      https://github.com/veryfinework
+ * @package   Superdropdown
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% set sourceOptions = field.getSourceOptions() %}
+
+<h2>Super dropdown Field Options</h2>
+
+{{ forms.selectField({
+        label: "Source",
+        id: 'sourceType',
+        name: 'sourceType',
+        options: [
+                { value: '', label: 'Select a source' },
+                { value: 'element', label: 'Element' },
+                { value: 'template', label: 'Template' },
+                { value: 'jsonData', label: 'JSON' },
+        ],
+        value: field['sourceType'],
+        warning: (field.sourceType is not empty) ? "Changing this may scramble any previously saved data for this field.",
+        toggle: true,
+        required: true,
+        targetPrefix: 'sourcetype-'
+}) }}
+
+<div id="sourcetype-element" {% if field.sourceType != 'element' %}class="hidden"{% endif %}>
+
+        {{ forms.selectField({
+                label: "Type",
+                id: 'elementType',
+                name: 'elementType',
+                options: [
+                        { value: 'categories', label: 'Categories' },
+                        { value: 'entries', label: 'Entries' },
+                ],
+                value: field.elementType,
+                toggle: true,
+                targetPrefix: 'sourceOptions-'
+        }) }}
+
+        <div id="sourceOptions-categories" {% if field.elementType != 'categories' %}class="hidden"{% endif %}>
+        {{ forms.selectField({
+                label: "Category Group",
+                instructions: "Select a category group to populate the dropdowns.",
+                id: 'categoryGroup',
+                name: 'categoryGroup',
+                options: sourceOptions.categories,
+                value: field.categoryGroup
+        }) }}
+        </div>
+
+        <div id="sourceOptions-entries" {% if field.elementType != 'entries' %}class="hidden"{% endif %}>
+        {{ forms.selectField({
+                label: "Section",
+                instructions: "Select a section to populate the dropdowns.",
+                id: 'entrySection',
+                name: 'entrySection',
+                options: sourceOptions.sections,
+                value: field.entrySection
+        }) }}
+        </div>
+
+        {{ forms.selectField({
+                label: "Return Value",
+                instructions: "If you set this to Element, then in your Twig templates this field will return the Element (Category/Entry) that has the id of the final value selected in the dropdown.",
+                id: 'returnType',
+                name: 'returnType',
+                options: [
+                        { value: 'array', label: 'Array' },
+                        { value: 'element', label: 'Element' }
+                ],
+                value: field['returnType'],
+        }) }}
+
+        {{ forms.textField({
+                label: "Maximum Nesting Level",
+                instructions: "Defaults to all levels.",
+                id: 'maxNestingLevel',
+                name: 'maxNestingLevel',
+                value: field.maxNestingLevel,
+                size: 2,
+                errors: field.getErrors('maxNestingLevel')
+        }) }}
+
+        {{ forms.checkboxField({
+                label: 'Include Blank Option',
+                name: 'blankOption',
+                checked: field.blankOption
+        }) }}
+
+        {{ forms.textField({
+                label: "Label Length",
+                instructions: "If category or entry titles are too long for practical use as dropdown option labels, set this limit on their length. An ellipsis will be concatenated to the truncated label.",
+                id: 'labelLength',
+                name: 'labelLength',
+                value: field.labelLength,
+                size: 2
+        }) }}
+
+
+</div>
+
+<div id="sourcetype-template" {% if field.sourceType != 'template' %}class="hidden"{% endif %}>
+{{ forms.autosuggestField({
+        label: 'Template',
+        instructions: 'A path to a template that returns properly formatted JSON. See docs.',
+        id: 'template',
+        name: 'template',
+        suggestions: craft.cp.getTemplateSuggestions(),
+        value: field['template']
+    })
+}}
+
+{{ forms.selectField({
+        label: "Label Layout",
+        id: 'labelLayout',
+        name: 'labelLayout',
+        options: [
+                { value: 'inline', label: 'Inline' },
+                { value: 'stacked', label: 'Stacked' },
+        ],
+        value: field['labelLayout']
+}) }}
+</div>
+
+<div id="sourcetype-jsonData" {% if field.sourceType != 'jsonData' %}class="hidden"{% endif %}>
+{{ forms.textareaField({
+        label: 'JSON Data',
+        instructions: 'Paste in JSON data. See examples in the /resources/templates/static-json folder of this plugin.',
+        id: 'jsonData',
+        name: 'jsonData',
+        value: field['jsonData'],
+        rows: 20
+    })
+}}
+</div>
+
+{{ forms.selectField({
+        label: "Layout",
+        id: 'layout',
+        name: 'layout',
+        options: [
+                { value: 'inline', label: 'Inline' },
+                { value: 'stacked', label: 'Stacked' },
+        ],
+        value: field['layout']
+}) }}

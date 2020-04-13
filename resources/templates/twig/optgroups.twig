@@ -1,0 +1,36 @@
+{% apply spaceless %}
+
+{% set dropdowns = [
+  {
+    "name": "optgroups",
+    "type": "primary",
+    "options": [
+      {
+        "optgroup": "Pies"
+      },
+      {
+        "label": "Apple Crumb",
+        "value": "apple-crumb"
+      },
+      {
+        "label": "Blueberry",
+        "value": "blueberry"
+      },
+      {
+        "optgroup": "Cakes"
+      },
+    {
+      "label": "Chocolate",
+      "value": "chocolate"
+    },
+    {
+      "label": "Carrot",
+      "value": "carrot"
+    }
+    ]
+  }
+] %}
+
+  {{ dropdowns | json_encode() | raw }}
+
+{% endapply %}

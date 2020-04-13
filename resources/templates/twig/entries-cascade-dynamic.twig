@@ -1,0 +1,67 @@
+{# cascading entry dropdowns #}
+{%- apply spaceless -%}
+
+  {% set entrySectionHandle = 'blog' %}
+  {% set maxNestingLevel = 2 %}
+
+  {% set dropdowns = [] %}
+  {% set subSelects = [] %}
+
+  {% for level in 1..maxNestingLevel %}
+
+    {% set options = [] %}
+
+    {% set dropdownName = 'entries' %}
+
+    {% set entries = craft.entries
+      .section(entrySectionHandle)
+      .all() %}
+
+    {% for entry in entries %}
+
+      {% set subselect = '' %}
+      {% if entry.hasDescendants == true %}
+        {% set subselect = entry.title %}
+      {% else %}
+
+      {% set option = [{
+        "label": entry.title,
+        "value": entry.id,
+        "subselect": subselect
+      }] %}
+
+      {% set options = options|merge( option ) %}
+
+      {# set dropdopwn name to name of parent #}
+      {% if loop.index == 1 %}
+        {% if level > 1 %}
+          {% set dropdownName = entry.parent.title %}
+        {% else %}
+          {% set dropdownName = entryGroupHandle %}
+        {% endif %}
+      {% endif %}
+
+    {% endfor %}
+
+    {# the first round sets the first dropdown as the primary one #}
+    {% if loop.index == 1 %}
+      {% set type = "primary" %}
+    {% else %}
+      {% set type = "conditional" %}
+    {% endif %}
+
+    {% set dropdown = [
+      {
+        "name": dropdownName,
+        "type": type,
+        "options": options
+      }
+    ] %}
+
+    {% set dropdowns = dropdowns|merge( dropdown ) %}
+
+  {% endfor %}
+
+  {{ dropdowns | json_encode() | raw }}
+
+{%- endapply -%}

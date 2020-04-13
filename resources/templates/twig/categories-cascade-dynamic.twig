@@ -1,0 +1,67 @@
+{# cascading category dropdowns #}
+{%- apply spaceless -%}
+
+  {% set categoryGroupHandle = 'dessert' %}
+  {% set maxNestingLevel = 2 %}
+
+  {% set dropdowns = [] %}
+  {% set subSelects = [] %}
+
+  {% for level in 1..maxNestingLevel %}
+
+    {% set categories = craft.categories.group(categoryGroupHandle).level(level).all() %}
+
+    {% set options = [] %}
+
+    {% set dropdownName = 'desserts' %}
+
+    {% for category in categories %}
+
+      {# find the wouldbe name of the sub dropdown #}
+      {% if category.hasDescendants == true %}
+        {% set subselect = category.title %}
+      {% else %}
+        {% set subselect = '' %}
+      {% endif %}
+
+      {% set option = [{
+        "label": category.title,
+        "value": category.id,
+        "subselect": subselect
+      }] %}
+
+      {% set options = options|merge( option ) %}
+
+      {# set dropdopwn name to name of parent category #}
+      {% if loop.index == 1 %}
+        {% if level > 1 %}
+          {% set dropdownName = category.parent.title %}
+        {% else %}
+          {% set dropdownName = categoryGroupHandle %}
+        {% endif %}
+      {% endif %}
+
+    {% endfor %}
+
+    {# the first round sets the first dropdown as the primary one #}
+    {% if loop.index == 1 %}
+      {% set type = "primary" %}
+    {% else %}
+      {% set type = "conditional" %}
+    {% endif %}
+
+    {% set dropdown = [
+      {
+        "name": dropdownName,
+        "type": type,
+        "options": options
+      }
+    ] %}
+
+    {% set dropdowns = dropdowns|merge( dropdown ) %}
+
+  {% endfor %}
+
+  {{ dropdowns | json_encode() | raw }}
+
+{%- endapply -%}

@@ -1,0 +1,116 @@
+{# Sentence style conditional dropdowns #}
+{%- apply spaceless -%}
+
+{% set creditRangeOptions = [] %}
+
+{% for num in 3..12 %}
+
+  {% set creditRangeOption = [{
+    "label": num,
+    "value": num
+  }] %}
+
+  {% set creditRangeOptions = creditRangeOptions|merge( creditRangeOption ) %}
+
+{% endfor %}
+
+{% set dropdowns = [  {
+    "name": "yearOperator",
+    "type": "primary",
+    "labelBefore": "If year of study ",
+    "options": [
+      {
+        "label": "=",
+        "value": "="
+      },
+      {
+        "label": ">",
+        "value": ">",
+      },
+      {
+        "label": "<",
+        "value": "<"
+      }
+    ]
+  },
+  {
+    "name": "yearOfStudy",
+    "type": "primary",
+    "options": [
+      {
+        "label": "All",
+        "value": "all"
+      },
+      {
+        "label": "1",
+        "value": "1"
+      },
+      {
+        "label": "2",
+        "value": "2"
+      },
+      {
+        "label": "3",
+        "value": "3"
+      },
+      {
+        "label": "4",
+        "value": "4"
+      },
+      {
+        "label": "5",
+        "value": "5"
+      }
+    ]
+  },
+  {
+    "name": "semester",
+    "type": "primary",
+    "labelBefore": " and semester = ",
+    "options": [
+      {
+        "label": "All",
+        "value": "all"
+      },
+      {
+        "label": "Fall",
+        "value": "fall"
+      },
+      {
+        "label": "Spring",
+        "value": "spring"
+      }
+    ]
+  },
+  {
+    "name": "tuitionMethod",
+    "type": "primary",
+    "labelBefore": " then apply ",
+    "labelAfter": " tuition ",
+    "options": [
+      {
+        "label": "Full-Time",
+        "value": "full-time"
+      },
+      {
+        "label": "Per Credit",
+        "value": "per-credit",
+        "subselect": "creditRangeMin,creditRangeMax",
+      }
+    ]
+  },
+  {
+    "name": "creditRangeMin",
+    "labelBefore": " with credit range between ",
+    "options": creditRangeOptions
+  },
+  {
+    "name": "creditRangeMax",
+    "labelBefore": " and ",
+    "options": creditRangeOptions
+  }
+] %}
+
+{{ dropdowns | json_encode() | raw }}
+
+{%- endapply -%}

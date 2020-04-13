@@ -1,0 +1,142 @@
+{# Building and Room selector dropdown #}
+{%- apply spaceless -%}
+
+  {% set dropdowns = [
+    {
+      "name": "location",
+      "type": "primary",
+      "options": [
+      {
+        "label": "North Campus",
+        "value": "north-campus",
+        "subselect": "north-campus"
+      },
+      {
+        "label": "South Campus",
+        "value": "south-campus",
+        "subselect": "south-campus"
+      }
+    ]
+    },
+    {
+      "name": "north-campus",
+      "options": [
+      {
+        "label": "Grammercy Hall",
+        "value": "grammercy",
+        "subselect": "grammercy"
+      },
+      {
+        "label": "North Quad",
+        "value": "north-quad",
+        "subselect": "quad-floor"
+      },
+      {
+        "label": "Student Center",
+        "value": "student-center"
+      }
+    ]
+    },
+    {
+      "name": "south-campus",
+      "options": [
+      {
+        "label": "University Center",
+        "value": "university-center",
+        "subselect": "university-center"
+      },
+      {
+        "label": "South Quad",
+        "value": "south-quad",
+        "subselect": "quad-floor"
+      },
+      {
+        "label": "Kearney Plaza",
+        "value": "kearney"
+      }
+    ]
+    },
+    {
+      "name": "grammercy",
+      "options": [
+      {
+        "label": "Lobby",
+        "value": "101"
+      },
+      {
+        "label": "Room 101",
+        "value": "lobby"
+      },
+      {
+        "label": "Room 110",
+        "value": "110"
+      },
+      {
+        "label": "Room 210",
+        "value": "210"
+      },
+      {
+        "label": "Room 303",
+        "value": "303"
+      },
+      {
+        "label": "Room 313",
+        "value": "313"
+      },
+      {
+        "label": "Room 325",
+        "value": "325"
+      }
+    ]
+    },
+    {
+      "name": "quad-floor",
+      "options": [
+      {
+        "label": "First Floor",
+        "value": "first"
+      },
+      {
+        "label": "Second Floor",
+        "value": "second"
+      }
+    ]
+    },
+    {
+      "name": "university-center",
+      "options": [
+      {
+        "label": "Room 1A",
+        "value": "1A"
+      },
+      {
+        "label": "Room 1B",
+        "value": "1B"
+      },
+      {
+        "label": "Room 11",
+        "value": "113"
+      },
+      {
+        "label": "Room 17",
+        "value": "117"
+      },
+      {
+        "label": "Room 210",
+        "value": "210"
+      },
+      {
+        "label": "Room 220",
+        "value": "220"
+      },
+      {
+        "label": "Room 230",
+        "value": "230"
+      }
+    ]
+    }
+  ] %}
+
+  {{ dropdowns | json_encode() | raw }}
+
+{%- endapply -%}

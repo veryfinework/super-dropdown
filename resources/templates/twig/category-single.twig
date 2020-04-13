@@ -1,0 +1,35 @@
+{# single category dropdown #}
+{%- apply spaceless -%}
+
+  {% set categoryGroupHandle = 'categoryGroupHandle' %}
+
+  {% set dropdowns = [] %}
+
+  {% set categories = craft.categories.group(categoryGroupHandle).level(1).all() %}
+
+  {% set options = [] %}
+
+  {% for category in categories %}
+
+    {% set option = [{
+      "label": category.title,
+      "value": category.id
+    }] %}
+
+    {% set options = options|merge( option ) %}
+
+  {% endfor %}
+
+  {% set dropdown = [
+    {
+      "name": categoryGroupHandle,
+      "type": type,
+      "options": options
+    }
+  ] %}
+
+  {% set dropdowns = dropdowns|merge( dropdown ) %}
+
+  {{ dropdowns | json_encode() | raw }}
+
+{%- endapply -%}

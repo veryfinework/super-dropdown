@@ -1,0 +1,71 @@
+{%- set class = [
+    'super-dropdown-field select',
+    (class is defined ? class : null),
+    (disabled is defined and disabled ? 'disabled' : null),
+]|filter|join(' ') %}
+
+
+<div class="{{ class }}"
+    {%- if block('attr') is defined %} {{ block('attr') }}{% endif %}>
+
+    {% for dropdownKey, dropdown in dropdowns %}
+
+        {%- set options = (dropdown.options is defined ? dropdown.options : []) %}
+        {%- set value = (dropdown.value is defined ? dropdown.value : null) %}
+        {%- set hasOptgroups = false -%}
+
+        {%- set conditionalClass = (dropdown.isConditional is defined) ? 'isConditional' : '' %}
+
+        <div class="sd-selectWrap sd-labelLayout--{{ labelLayout }} {{ conditionalClass }}">
+
+            {%- if dropdown.labelBefore is defined %}<span class="sd-labelBefore">{{ dropdown.labelBefore }}</span>{% endif %}
+
+        <select
+            {%- if id is defined %} id="{{ id }}[{{ dropdownKey }}]"{% endif %}
+            {%- if name is defined %} name="{{ name }}[{{ dropdownKey }}]"{% endif %}
+            data-key="{{ dropdownKey }}"
+            {%- if dropdown.initialvalue is defined %} data-initialvalue="{{ dropdown.initialvalue }}" {% endif %}
+            {%- set selectClass = [
+                '',
+                (dropdown.type is defined ? 'type-'~dropdown.type : null)
+            ]|filter|join(' ') %}
+                class="{{ selectClass }}"
+            {%- if autofocus is defined and autofocus and not craft.app.request.isMobileBrowser(true) %} autofocus{% endif %}
+            {%- if disabled is defined and disabled %} disabled{% endif %}>
+
+            {% for key, option in options %}
+
+                {% if option.optgroup is defined %}
+                    {% if hasOptgroups %}
+                        </optgroup>
+                    {% else %}
+                        {% set hasOptgroups = true %}
+                    {% endif %}
+                    <optgroup label="{{ option.optgroup }}">
+                {% else %}
+                    {% set optionLabel = (option.label is defined ? option.label : option) %}
+                    {% set optionValue = (option.value is defined ? option.value : key) %}
+                    {% set optionDisabled = (option.disabled is defined ? option.disabled : false) %}
+                    <option
+                            value="{{ optionValue }}"
+                            {% if (option.subselect is defined) %} data-trgt="{{ option.subselect }}" {% endif %}
+                            {% if (option.selected is defined) %} selected {% endif %}
+                            {% if optionDisabled %} disabled{% endif %}
+                    >{{ optionLabel }}</option>
+                {% endif %}
+
+            {% endfor %}
+
+            {% if hasOptgroups %}
+                </optgroup>
+            {% endif %}
+
+        </select>
+
+        {%- if dropdown.labelAfter is defined %}<span class="sd-labelAfter">{{ dropdown.labelAfter }}</span>{% endif %}
+
+        </div>
+
+    {% endfor %}
+
+</div>
