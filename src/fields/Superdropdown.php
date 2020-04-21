@@ -112,7 +112,6 @@ class Superdropdown extends Field
 
     /**
      *
-     *
      * @var string
      */
     public $queryParams = '';
@@ -123,6 +122,12 @@ class Superdropdown extends Field
      * @var string
      */
     public $blankOption = false;
+
+    /**
+     *
+     * @var string
+     */
+    public $blankOptionLabel = '--- select ---';
 
     /**
      * JSON data

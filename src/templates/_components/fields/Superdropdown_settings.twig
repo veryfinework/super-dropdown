@@ -97,8 +97,20 @@
         {{ forms.checkboxField({
                 label: 'Include Blank Option',
                 name: 'blankOption',
-                checked: field.blankOption
+                checked: field.blankOption,
+                toggle: 'blankOptionLabel'
         }) }}
+
+        <div id="blankOptionLabel" {% if not field.blankOption %}class="hidden"{% endif %}>
+        {{ forms.textField({
+                label: "Blank Option Label",
+                instructions: "Customize the 'empty' label for dropdowns",
+                id: 'blankOptionLabel',
+                name: 'blankOptionLabel',
+                value: field.blankOptionLabel,
+                size: 50
+        }) }}
+        </div>
 
         {{ forms.textField({
                 label: "Label Length",
@@ -108,7 +120,6 @@
                 value: field.labelLength,
                 size: 2
         }) }}
-
 
 </div>
 

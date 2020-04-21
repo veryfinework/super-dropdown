@@ -106,13 +106,13 @@ class DropdownSource extends Component
         }
 
         if ($field->blankOption) {
-            $this->addBlankOptions($dropdowns);
+            $this->addBlankOptions($dropdowns, $field->blankOptionLabel);
         }
 
         return $dropdowns;
     }
 
-    public function addBlankOptions(&$dropdowns) {
+    public function addBlankOptions(&$dropdowns, $blankOptionLabel) {
 
         // add blank options, skip the first
         $first = true;
@@ -121,8 +121,9 @@ class DropdownSource extends Component
                 $first = false;
                 continue;
             }
+
             array_unshift($dropdown['options'], [
-                'label' => '--- select ---',
+                'label' => $blankOptionLabel,
                 'value' => ''
             ]);
         }

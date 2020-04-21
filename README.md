@@ -7,7 +7,7 @@ A custom field for the Craft CMS for building complex dropdown fields from nativ
 This plugin transforms structured data into series of linked dropdowns. The data source can be Categories, Entries, or any JSON data that is properly formatted. The JSON data may be static or dynamic. Dynamic data can be supplied by Twig templates using the complete Craft API. Static JSON can simply be pasted into the field definition, or provided by a Twig template.
 
 ## Documentation
-[Find complete documentation here.](https://veryfine.work/plugins/superdropdown/docs/)
+[Find complete documentation here.](https://veryfine.work/docs/superdropdown/)
 
 ## Some Things You Can Do With this Plugin
 * Create a single dropdown from JSON data (static or dynamic)

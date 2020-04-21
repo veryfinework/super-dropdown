@@ -2,7 +2,7 @@
     "name": "veryfine/super-dropdown",
     "description": "A custom field for the Craft CMS for building complex dropdown fields from native elements or data.",
     "type": "craft-plugin",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "keywords": [
         "craft",
         "cms",
@@ -14,7 +14,7 @@
         "select"
     ],
     "support": {
-        "docs": "https://veryfine.work/plugins/superdropdown/docs/",
+        "docs": "https://veryfine.work/docs/superdropdown/",
         "issues": "https://github.com/veryfinework/super-dropdown/issues"
     },
     "license": "proprietary",
