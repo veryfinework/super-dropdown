@@ -49,49 +49,49 @@ class Superdropdown extends Field
      *
      * @var string
      */
-    public $categoryGroup;
+    public string $categoryGroup;
 
     /**
      * entry section id string
      *
      * @var string
      */
-    public $entrySection;
+    public string $entrySection;
 
     /**
      * Source: 'jsonData' or 'template' or 'element'
      *
      * @var string
      */
-    public $sourceType = '';
+    public string $sourceType = '';
 
     /**
      * How the fields are arranged
      *
      * @var string
      */
-    public $layout = 'inline';
+    public string $layout = 'inline';
 
     /**
      * How the labels are arranged
      *
      * @var string
      */
-    public $labelLayout = 'inline'; // or 'stacked'
+    public string $labelLayout = 'inline'; // or 'stacked'
 
     /**
      * Element class
      *
      * @var string
      */
-    public $elementType = 'categories';
+    public string $elementType = 'categories';
 
     /**
      * Element class
      *
-     * @var string
+     * @var string|array
      */
-    public $elementTypeMap = [
+    public string|array $elementTypeMap = [
         'entries' => Entry::class,
         'categories' => Category::class
     ];
@@ -101,54 +101,54 @@ class Superdropdown extends Field
      *
      * @var string
      */
-    public $labelLength = 30;
+    public string|int $labelLength = 30;
 
     /**
      * Level limit on structures for Elements
      *
      * @var string
      */
-    public $maxNestingLevel = 3;
+    public string|int $maxNestingLevel = 3;
 
     /**
      *
      * @var string
      */
-    public $queryParams = '';
+    public string $queryParams = '';
 
     /**
      * Include a blank option in category dropdowns
      *
      * @var string
      */
-    public $blankOption = false;
+    public string|bool $blankOption = false;
 
     /**
      *
      * @var string
      */
-    public $blankOptionLabel = '--- select ---';
+    public string $blankOptionLabel = '--- select ---';
 
     /**
      * JSON data
      *
      * @var string
      */
-    public $jsonData = '';
+    public string $jsonData = '';
 
     /**
      * Path to frontend template that returns JSON
      *
      * @var string
      */
-    public $template = '';
+    public string $template = '';
 
     /**
      * Whether to return an array or an Element
      *
      * @var string
      */
-    public $returnType = 'array';
+    public string $returnType = 'array';
 
     // Static Methods
     // =========================================================================
@@ -184,7 +184,7 @@ class Superdropdown extends Field
     /**
      * @inheritDoc
      */
-    public function normalizeValue($value, ElementInterface $element = null)
+    public function normalizeValue($value, ElementInterface $element = null): ?array
     {
         if (is_string($value) && !empty($value)) {
             $value = Json::decodeIfJson($value);

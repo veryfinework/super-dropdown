@@ -34,7 +34,7 @@ class EntriesSource extends DropdownSource
      *
      * @var string
      */
-    public $elementType = Entry::class;
+    public string $elementType = Entry::class;
 
     public function getElements($field) : void
     {
