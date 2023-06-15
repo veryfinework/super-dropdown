@@ -1,5 +1,8 @@
 # Super Dropdown Changelog
 
+## 4.0.0 - 2023-06-14
+- Updated for Craft 4
+
 ## 1.0.1 - 2020-04-21
 - Added 'Blank Option Label' field
 - Moved docs to new location
