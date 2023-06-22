@@ -49,14 +49,14 @@ class Superdropdown extends Field
      *
      * @var string
      */
-    public string $categoryGroup;
+    public string $categoryGroup = '';
 
     /**
      * entry section id string
      *
      * @var string
      */
-    public string $entrySection;
+    public string $entrySection = '';
 
     /**
      * Source: 'jsonData' or 'template' or 'element'
@@ -229,8 +229,8 @@ class Superdropdown extends Field
     public function getSourceOptions(): array
     {
         // context of 'modal' retrieves all groups, 'index' retrieves only groups editable by the user
-        $availableCategoryGroups = Craft::$app->getElementIndexes()->getSources(Category::class, 'modal');
-        $availableSections = Craft::$app->getElementIndexes()->getSources(Entry::class, 'modal');
+        $availableCategoryGroups = Craft::$app->getElementSources()->getSources(Category::class, 'modal');
+        $availableSections = Craft::$app->getElementSources()->getSources(Entry::class, 'modal');
 
         return [
             'categories' => $this->makeOptionsFromSources($availableCategoryGroups),
@@ -281,7 +281,7 @@ class Superdropdown extends Field
     /**
      * @inheritDoc
      */
-    public function getSettingsHtml()
+    public function getSettingsHtml(): ?string
     {
         // Render the settings template
         return Craft::$app->getView()->renderTemplate(
@@ -340,7 +340,7 @@ class Superdropdown extends Field
         $jsonVars = [
             'id' => "{$namespacedId}-field",
             'editable' => []
-            ];
+        ];
         $jsonVars = Json::encode($jsonVars);
         $view->registerJs('window.CE_Superdropdown(' . $jsonVars . ');');
 
