@@ -57,7 +57,7 @@ class EntriesSource extends DropdownSource
 
             default:
                 $sectionUId = StringHelper::afterLast($field->entrySection, ':');
-                $section = Craft::$app->sections->getSectionByUid($sectionUId);
+                $section = Craft::$app->entries->getSectionByUid($sectionUId);
                 $entryQuery->sectionId($section->id);
                 if ($section->type === Section::TYPE_STRUCTURE) {
                     $entryQuery->withStructure()->level($maxLevels);
