@@ -49,7 +49,7 @@ class EntriesSource extends DropdownSource
                 break;
 
             case 'singles':
-                $sectionsArray = Craft::$app->sections->getSectionsByType(Section::TYPE_SINGLE);
+                $sectionsArray = Craft::$app->entries->getSectionsByType(Section::TYPE_SINGLE);
                 $sectionIds = ArrayHelper::getColumn($sectionsArray, 'id');
                 $entryQuery->sectionId($sectionIds);
                 $this->topLevelName = 'singles';
