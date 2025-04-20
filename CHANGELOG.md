@@ -1,5 +1,8 @@
 # Super Dropdown Changelog
 
+## 5.0.0 - 2025-04-20
+- Updated for Craft 5
+
 ## 4.0.0 - 2023-06-14
 - Updated for Craft 4
 

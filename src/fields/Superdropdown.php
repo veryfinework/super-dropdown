@@ -165,7 +165,7 @@ class Superdropdown extends Field
     /**
      * @inheritdoc
      */
-    public static function valueType(): string
+    public static function phpType(): string
     {
         return 'mixed';
     }
@@ -184,7 +184,7 @@ class Superdropdown extends Field
     /**
      * @inheritDoc
      */
-    public function normalizeValue($value, ElementInterface $element = null): ?array
+    public function normalizeValue(mixed $value, ?\craft\base\ElementInterface $element = null): ?array
     {
         if (is_string($value) && !empty($value)) {
             $value = Json::decodeIfJson($value);
@@ -295,7 +295,7 @@ class Superdropdown extends Field
     /**
      * @inheritDoc
      */
-    public function getInputHtml($value, ElementInterface $element = null): string
+    public function getInputHtml(mixed $value, ?\craft\base\ElementInterface $element = null): string
     {
         $view = Craft::$app->getView();
 
