@@ -33,23 +33,23 @@ class DropdownSource extends Component
      *
      * @var string
      */
-    public $elementType = '';
+    public string $elementType = '';
 
     /**
      * Key used for topLevel dropname array
      *
      * @var string
      */
-    public $topLevelName = '';
+    public string $topLevelName = '';
 
     /**
      *
      * @var array
      */
-    public $elements = [];
+    public array $elements = [];
 
 
-    public function getElements($field)
+    public function getElements($field): void
     {
         $this->elements = [];
     }

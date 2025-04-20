@@ -39,7 +39,7 @@ class SuperDropdown extends Plugin
      *
      * @var Superdropdown
      */
-    public static $plugin;
+    public static Plugin $plugin;
 
     // Public Properties
     // =========================================================================
@@ -48,12 +48,12 @@ class SuperDropdown extends Plugin
      *
      * @var string
      */
-    public $schemaVersion = '1.0.0';
+    public string $schemaVersion = '1.0.0';
 
     // Public Methods
     // =========================================================================
 
-    public function init()
+    public function init(): void
     {
         parent::init();
         self::$plugin = $this;
